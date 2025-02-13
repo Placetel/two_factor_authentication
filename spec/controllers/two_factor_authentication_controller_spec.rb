@@ -10,8 +10,10 @@ describe Devise::TwoFactorAuthenticationController, type: :controller do
       end
     end
 
-    before do
-      sign_in
+    let(:user) { create_user('not_encrypted') }
+
+    before(:each) do
+      login_in(user)
     end
 
     context 'after user enters valid OTP code' do
