@@ -48,7 +48,7 @@ class Devise::TwoFactorAuthenticationController < DeviseController
       cookies.signed[TwoFactorAuthentication::REMEMBER_TFA_COOKIE_NAME] = {
           value: "#{resource.class}-#{resource.public_send(Devise.second_factor_resource_id)}",
           expires: expires_seconds.seconds.from_now,
-          secure: Rails.env.production? # if this cookie is transmitted to HTTPS servers. default is false
+          secure: request.scheme == 'https' # if this cookie is transmitted to HTTPS servers. default is false
       }
     end
   end
